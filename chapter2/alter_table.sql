@@ -1,4 +1,3 @@
-
 # To edit person pk we need to remove it from the favorite_food fk
 ALTER TABLE favorite_food
     DROP FOREIGN KEY fk_person_id,
