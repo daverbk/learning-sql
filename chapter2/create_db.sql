@@ -15,5 +15,5 @@ USE bank;
 # Check current date/time
 SELECT now() FROM dual;
 
-# Check avaliable character sets
+# Check available character sets
 SHOW CHARACTER SET;
