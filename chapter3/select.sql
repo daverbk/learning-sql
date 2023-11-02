@@ -33,3 +33,12 @@ FROM account;
 # Sub query
 SELECT e.emp_id, e.fname, e.lname
 FROM (SELECT emp_id, fname, lname, start_date, title FROM employee) e;
+
+# Views
+CREATE VIEW employee_vw AS
+SELECT emp_id, fname, lname,
+    YEAR(start_date) start_year
+FROM employee;
+
+SELECT emp_id, start_year
+FROM employee_vw;
