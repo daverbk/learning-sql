@@ -42,3 +42,61 @@ FROM employee;
 
 SELECT emp_id, start_year
 FROM employee_vw;
+
+# Joining preview
+SELECT employee.emp_id, employee.fname,
+       employee.lname, department.name dept_name
+FROM employee INNER JOIN department
+        ON employee.dept_id = department.dept_id;
+
+# Joining preview with pseudonyms
+SELECT e.emp_id, e.fname,
+       e.lname, d.name dept_name
+FROM employee e INNER JOIN department d
+        ON e.dept_id = d.dept_id;
+
+# Where
+SELECT emp_id, fname, lname, start_date, title
+FROM employee
+WHERE title = 'Head Teller';
+
+# Where may contain as mush conditions as required with AND, OR
+SELECT emp_id, fname, lname, start_date, title
+FROM employee
+WHERE title = 'Head Teller'
+AND start_date > '2002-01-01';
+
+SELECT emp_id, fname, lname, start_date, title
+FROM employee
+WHERE title = 'Head Teller'
+OR start_date > '2002-01-01';
+
+SELECT emp_id, fname, lname, start_date, title
+FROM employee
+WHERE (title = 'Head Teller' AND start_date > '2002-01-01')
+OR (title = 'Teller' AND start_date > '2003-01-01');
+
+# Order by
+SELECT open_emp_id, product_cd
+FROM account
+ORDER BY open_emp_id;
+
+SELECT open_emp_id, product_cd
+FROM account
+ORDER BY open_emp_id, product_cd;
+
+# DESC AND ASC (the second is used by default) with LIMIT (isn't included into ANSI standard)
+SELECT account_id, product_cd, open_date, avail_balance
+FROM account
+ORDER BY avail_balance DESC
+LIMIT 5;
+
+# Sorting via expressions
+SELECT cust_id, cust_type_cd, city, state, fed_id
+FROM customer
+ORDER BY RIGHT(fed_id,3);
+
+# Sorting by column number
+SELECT emp_id, title, start_date, fname, lname
+FROM employee
+ORDER BY 2, 5;
