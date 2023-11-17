@@ -103,3 +103,64 @@ SELECT account_id, product_cd, cust_id, avail_balance
 FROM account
 WHERE product_cd IN (SELECT product_cd FROM product
     WHERE product_type_cd = 'ACCOUNT');
+
+# NOT IN
+
+SELECT account_id, product_cd, cust_id, avail_balance
+FROM account
+WHERE product_cd NOT IN('CHK', 'SAV', 'CD', 'MM');
+
+# Starts with
+
+SELECT emp_id, fname, lname
+FROM employee
+WHERE left(lname, 1) = 'T';
+
+# LIKE; _ -> exactly one symbol; % -> any number of symbols (even none)
+
+SELECT lname
+FROM employee
+WHERE lname LIKE  '_a%e%';
+
+SELECT cust_id, fed_id
+FROM customer
+WHERE fed_id LIKE '___-__-____';
+
+SELECT emp_id, fname, lname
+FROM employee
+WHERE lname LIKE 'F%' OR lname LIKE 'G%';
+
+# Regular expressions
+
+SELECT emp_id, fname, lname
+FROM employee
+WHERE lname REGEXP '^[FG]';
+
+# Null conditions
+
+SELECT emp_id, fname, lname, superior_emp_id
+FROM employee
+WHERE superior_emp_id IS NULL;
+
+SELECT emp_id, fname, lname, superior_emp_id
+FROM employee
+WHERE superior_emp_id IS NOT NULL;
+
+# Null condition doesn't with '='
+
+SELECT emp_id, fname, lname, superior_emp_id
+FROM employee
+WHERE superior_emp_id = NULL;
+
+# Possibility to miss data. The next query won't return the NULL records
+
+SELECT emp_id, fname, lname, superior_emp_id
+FROM employee
+WHERE superior_emp_id != 6;
+
+# Fix
+
+SELECT emp_id, fname, lname, superior_emp_id
+FROM employee
+WHERE superior_emp_id != 6 OR superior_emp_id is NULL;
+
