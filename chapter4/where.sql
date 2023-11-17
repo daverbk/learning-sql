@@ -96,3 +96,10 @@ AND start_date >= '2001-01-01';
 SELECT account_id, product_cd, cust_id, avail_balance
 FROM account
 WHERE product_cd IN('CHK', 'SAV', 'CD', 'MM');
+
+# Sub-query set condition
+
+SELECT account_id, product_cd, cust_id, avail_balance
+FROM account
+WHERE product_cd IN (SELECT product_cd FROM product
+    WHERE product_type_cd = 'ACCOUNT');
