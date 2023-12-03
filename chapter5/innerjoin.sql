@@ -47,3 +47,25 @@ FROM account a INNER JOIN customer c
     INNER JOIN employee e
     ON a.open_emp_id = e.emp_id
 WHERE c.cust_type_cd = 'B';
+
+# Is equal to
+SELECT a.account_id, c.fed_id, e.fname, e.lname
+FROM customer c INNER JOIN account a
+    ON a.cust_id = c.cust_id
+    INNER JOIN employee e
+    ON a.open_emp_id = e.emp_id
+WHERE c.cust_type_cd = 'B';
+
+# Sub-queries as tables
+SELECT a.account_id, a.cust_id, a.open_date, a.product_cd
+FROM account a
+    INNER JOIN
+    (SELECT emp_id, assigned_branch_id
+     FROM employee
+     WHERE (title = 'Teller' OR title = 'Head Teller')) e
+    ON a.open_emp_id = e.emp_id
+    INNER JOIN
+    (SELECT branch_id
+     FROM branch
+     WHERE name = 'Woburn Branch') b
+ON e.assigned_branch_id = b.branch_id;
