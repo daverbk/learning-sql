@@ -64,3 +64,26 @@ SELECT name, name LIKE '%ns' ends_in_ns
 FROM department;
 
 # REGEXP example
+SELECT cust_id, cust_type_cd, fed_id,
+       fed_id REGEXP '.{3}-.{2}-.{4}' is_ss_no_format
+FROM customer;
+
+# We can use CONCAT to add data to the end of an existing string
+UPDATE string_tbl
+SET text_fld = concat(text_fld, ', but now it is longer');
+
+# We can use CONCAT for different data types at once
+SELECT concat(fname, ' ', lname, ' has been a ',
+              title, ' since ', start_date) emp_narrative
+FROM employee
+WHERE title = 'Teller' OR title = 'Head Teller';
+
+# We can use INSERT to insert data into a string
+SELECT insert('goodbye world', 9, 0, 'cruel ') string;
+
+# Depending on the third argument INSERT
+# either inserts or replaces part of the string
+SELECT insert('goodbye world', 1, 7, 'hello') string;
+
+# We can get a substring with SUBSTRING
+SELECT substring('goodbye cruel world', 9, 5);
