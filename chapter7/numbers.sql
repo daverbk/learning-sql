@@ -50,4 +50,3 @@ SELECT round(17, -1), truncate(17, -1);
 # abs() returns an absolute balance
 SELECT account_id, sign(avail_balance), abs(avail_balance)
 FROM account;
-
