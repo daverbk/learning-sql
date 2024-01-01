@@ -42,3 +42,27 @@ FROM Weather w1
 JOIN Weather w2
 ON DATEDIFF(w1.recordDate, w2.recordDate) = 1
 WHERE w1.temperature > w2.temperature;
+
+# 1661. Average Time of Process per Machine
+SELECT machine_id,
+       ROUND(SUM(CASE WHEN activity_type = 'start' THEN timestamp * -1 ELSE timestamp END) * 1.0
+                 / (SELECT COUNT(DISTINCT process_id)), 3) AS processing_time
+FROM Activity
+GROUP BY machine_id
+
+# 577. Employee Bonus
+SELECT e.name name, b.bonus bonus
+FROM Employee e
+LEFT JOIN Bonus b
+ON e.empId = b.empId
+WHERE b.bonus < 1000 OR b.bonus is null;
+
+# 1280. Students and Examinations
+SELECT s.student_id, s.student_name, sub.subject_name, COUNT(e.subject_name) attended_exams
+FROM Students s
+CROSS JOIN Subjects sub
+LEFT JOIN Examinations e
+    ON s.student_id = e.student_id
+    AND sub.subject_name = e.subject_name
+GROUP BY s.student_id, s.student_name, sub.subject_name
+ORDER BY s.student_id, sub.subject_name;
