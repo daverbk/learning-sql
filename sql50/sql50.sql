@@ -48,7 +48,7 @@ SELECT machine_id,
        ROUND(SUM(CASE WHEN activity_type = 'start' THEN timestamp * -1 ELSE timestamp END) * 1.0
                  / (SELECT COUNT(DISTINCT process_id)), 3) AS processing_time
 FROM Activity
-GROUP BY machine_id
+GROUP BY machine_id;
 
 # 577. Employee Bonus
 SELECT e.name name, b.bonus bonus
@@ -79,3 +79,10 @@ SELECT s.user_id, ROUND(AVG(IF(c.action = 'confirmed',1,0)), 2) confirmation_rat
 FROM Signups s
 LEFT JOIN Confirmations c ON s.user_id = c.user_id
 GROUP BY s.user_id;
+
+# 620. Not Boring Movies
+SELECT *
+FROM Cinema
+WHERE MOD(id, 2) != 0
+    AND description NOT LIKE '%boring%'
+ORDER BY rating DESC
