@@ -129,3 +129,12 @@ SELECT DATE_FORMAT(trans_date, '%Y-%m') month,
     SUM(IF(state = 'approved', amount, 0)) approved_total_amount
 FROM Transactions
 GROUP BY month, country;
+
+# 1174. Immediate Food Delivery II
+SELECT ROUND(AVG(order_date = customer_pref_delivery_date) * 100, 2) immediate_percentage
+FROM Delivery
+WHERE (customer_id, order_date) IN (
+    SELECT customer_id, MIN(order_date)
+    FROM Delivery
+    GROUP BY customer_id
+);
