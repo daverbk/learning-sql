@@ -95,3 +95,10 @@ LEFT JOIN UnitsSold u
     AND u.purchase_date BETWEEN start_date
     AND end_date
 GROUP BY p.product_id;
+
+# 1075. Project Employees I
+SELECT p.project_id, ROUND(AVG(e.experience_years), 2) average_years
+FROM Project p
+LEFT JOIN Employee e
+    ON p.employee_id = e.employee_id
+GROUP BY p.project_id;
