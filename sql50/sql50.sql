@@ -111,3 +111,11 @@ LEFT JOIN Users u
     ON u.user_id = r.user_id
 GROUP BY r.contest_id
 ORDER BY percentage DESC, r.contest_id;
+
+# 1211. Queries Quality and Percentage
+SELECT query_name,
+    ROUND(AVG(rating / position), 2) quality,
+    ROUND(SUM(IF(rating < 3, 1, 0)) * 100 / COUNT(*), 2) poor_query_percentage
+FROM Queries
+WHERE query_name IS NOT NULL
+GROUP BY query_name;
