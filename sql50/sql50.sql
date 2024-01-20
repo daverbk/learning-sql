@@ -144,3 +144,15 @@ SELECT ROUND(COUNT(DISTINCT player_id) / (SELECT COUNT(DISTINCT player_id) FROM 
 FROM Activity
 WHERE (player_id, DATE_SUB(event_date, INTERVAL 1 DAY))
 IN (SELECT player_id, MIN(event_date) AS first_login FROM ACTIVITY GROUP BY player_id);
+
+# 2356. Number of Unique Subjects Taught by Each Teacher
+SELECT teacher_id, COUNT(DISTINCT subject_id) cnt
+FROM Teacher
+GROUP BY teacher_id;
+
+# 1141. User Activity for the Past 30 Days I
+SELECT activity_date day, COUNT(DISTINCT user_id) active_users
+FROM Activity
+WHERE DATEDIFF('2019-07-27', activity_date) < 30
+    AND DATEDIFF('2019-07-27', activity_date) >= 0
+GROUP BY day;
