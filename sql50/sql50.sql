@@ -169,3 +169,23 @@ WHERE (product_id, year) IN (
     GROUP BY
       product_id
 );
+
+# 596. Classes More Than 5 Students
+SELECT class
+FROM Courses
+GROUP BY class
+HAVING COUNT(student) > 4;
+
+# 1729. Find Followers Count
+SELECT user_id, COUNT(follower_id) followers_count
+FROM Followers
+GROUP BY user_id
+ORDER BY user_id;
+
+# 619. Biggest Single Number
+SELECT MAX(num) AS num
+FROM (SELECT num
+    FROM MyNumbers
+    GROUP BY num
+    HAVING COUNT(num) = 1
+) unique_numbers;
