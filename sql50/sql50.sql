@@ -189,3 +189,13 @@ FROM (SELECT num
     GROUP BY num
     HAVING COUNT(num) = 1
 ) unique_numbers;
+
+# 1045. Customers Who Bought All Products
+SELECT customer_id
+FROM Customer
+GROUP BY customer_id
+HAVING COUNT(DISTINCT product_key) =
+    (
+        SELECT COUNT(product_key)
+        FROM Product
+);
