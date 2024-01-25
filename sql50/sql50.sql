@@ -207,3 +207,24 @@ INNER JOIN Employees e2
     ON e1.employee_id = e2.reports_to
 GROUP BY e1.employee_id
 ORDER BY e1.employee_id;
+
+# 1789. Primary Department for Each Employee
+SELECT employee_id, department_id
+FROM employee
+WHERE primary_flag = 'Y'
+UNION
+SELECT employee_id, department_id
+FROM employee
+GROUP BY employee_id
+HAVING COUNT(*) = 1;
+
+# 610. Triangle Judgement
+SELECT x,y,z,
+CASE
+  WHEN x + y <= z
+  OR x + z <= y
+  OR y + z <= x
+  THEN 'No'
+  ELSE 'Yes'
+END triangle
+FROM triangle;
