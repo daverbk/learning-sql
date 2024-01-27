@@ -238,3 +238,19 @@ WHERE l1.Id = l2.Id - 1
     AND l2.Id = l3.Id - 1
     AND l1.Num = l2.Num
     AND l2.Num = l3.Num;
+
+
+# 1164. Product Price at a Given Date
+SELECT product_id, 10 AS price
+FROM Products
+GROUP BY product_id
+HAVING MIN(change_date) > '2019-08-16'
+UNION ALL
+SELECT product_id, new_price price
+FROM Products
+WHERE (product_id, change_date) IN (
+    SELECT product_id, MAX(change_date)
+    FROM Products
+    WHERE change_date <= '2019-08-16'
+    GROUP BY product_id
+);
