@@ -254,3 +254,10 @@ WHERE (product_id, change_date) IN (
     WHERE change_date <= '2019-08-16'
     GROUP BY product_id
 );
+
+# 1204. Last Person to Fit in the Bus
+SELECT person_name FROM
+(SELECT *, SUM(weight) OVER(ORDER BY turn) AS weight_so_far FROM Queue) cnt
+WHERE cnt.weight_so_far <= 1000
+ORDER BY weight_so_far DESC
+LIMIT 1;
