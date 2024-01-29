@@ -261,3 +261,13 @@ SELECT person_name FROM
 WHERE cnt.weight_so_far <= 1000
 ORDER BY weight_so_far DESC
 LIMIT 1;
+
+# 1907. Count Salary Categories
+SELECT "Low Salary" category, sum(income < 20000) accounts_count
+FROM Accounts
+UNION
+SELECT "Average Salary" category, sum(income BETWEEN 20000 AND 50000) accounts_count
+FROM Accounts
+UNION
+SELECT "High Salary" category, sum(income > 50000) accounts_count
+FROM Accounts;
