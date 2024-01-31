@@ -281,3 +281,12 @@ WHERE e2.employee_id IS NULL
     AND e1.manager_id IS NOT NULL
     AND e1.salary < 30000
 ORDER BY employee_id;
+
+# 626. Exchange Seats
+SELECT
+    IF(id < (SELECT MAX(id) FROM Seat),
+    IF(id % 2 = 0, id - 1, id + 1),
+    IF(id % 2 = 0, id - 1, id)) AS id,
+    student
+FROM Seat
+ORDER BY id;
