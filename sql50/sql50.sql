@@ -310,3 +310,21 @@ WHERE  MONTH(created_at) = 2 AND YEAR(created_at) = 2020
 GROUP BY movie_id
 ORDER BY AVG(rating) DESC, title ASC
 LIMIT 1)
+
+# 1321. Restaurant Growth
+SELECT
+    visits.visited_on AS visited_on,
+    SUM(c.amount) AS amount,
+    ROUND(SUM(c.amount) / 7.0, 2) average_amount
+FROM (
+    SELECT DISTINCT visited_on
+    FROM Customer
+    WHERE DATEDIFF(
+        visited_on,
+        (SELECT MIN(visited_on) FROM Customer)
+    ) >= 6
+) visits
+LEFT JOIN Customer c
+ON DATEDIFF(visits.visited_on, c.visited_on) BETWEEN 0 and 6
+GROUP BY visits.visited_on
+ORDER BY visited_on;
