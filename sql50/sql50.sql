@@ -340,4 +340,10 @@ FROM(
 ) tbl
 GROUP BY id
 ORDER BY num DESC
-LIMIT 1
+LIMIT 1;
+
+# 1667. Fix Names in a Table
+SELECT user_id,
+CONCAT(UPPER(SUBSTRING(name, 1, 1)), LOWER(SUBSTRING(name, 2))) name
+FROM Users
+ORDER BY user_id;
