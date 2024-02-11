@@ -328,3 +328,16 @@ LEFT JOIN Customer c
 ON DATEDIFF(visits.visited_on, c.visited_on) BETWEEN 0 and 6
 GROUP BY visits.visited_on
 ORDER BY visited_on;
+
+# 602. Friend Requests II: Who Has the Most Friends
+SELECT id, COUNT(*) num
+FROM(
+    SELECT requester_id id
+    FROM RequestAccepted
+    UNION ALL
+    SELECT accepter_id id
+    FROM RequestAccepted
+) tbl
+GROUP BY id
+ORDER BY num DESC
+LIMIT 1
