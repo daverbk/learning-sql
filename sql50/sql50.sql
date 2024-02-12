@@ -309,7 +309,7 @@ USING (movie_id)
 WHERE  MONTH(created_at) = 2 AND YEAR(created_at) = 2020
 GROUP BY movie_id
 ORDER BY AVG(rating) DESC, title ASC
-LIMIT 1)
+LIMIT 1);
 
 # 1321. Restaurant Growth
 SELECT
