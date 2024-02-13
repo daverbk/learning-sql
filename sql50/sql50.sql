@@ -358,3 +358,8 @@ WHERE conditions LIKE 'DIAB1%'
 DELETE p1
 FROM Person p1, Person p2
 WHERE p1.email = p2.email AND p1.id > p2.id;
+
+# 176. Second Highest Salary
+SELECT MAX(SALARY) AS SecondHighestSalary
+FROM EMPLOYEE
+WHERE SALARY < (SELECT MAX(SALARY) FROM EMPLOYEE);
