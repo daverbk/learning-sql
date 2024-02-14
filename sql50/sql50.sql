@@ -363,3 +363,11 @@ WHERE p1.email = p2.email AND p1.id > p2.id;
 SELECT MAX(SALARY) AS SecondHighestSalary
 FROM EMPLOYEE
 WHERE SALARY < (SELECT MAX(SALARY) FROM EMPLOYEE);
+
+# 1484. Group Sold Products By The Date
+SELECT sell_date,
+       COUNT(DISTINCT product) num_sold,
+       GROUP_CONCAT(DISTINCT product) products
+FROM Activities
+GROUP BY sell_date
+ORDER BY sell_date;

@@ -46,4 +46,4 @@ WHERE open_emp_id <> (
 # IN operator can be use to search in a set of values
 SELECT branch_id, name, city
 FROM branch
-WHERE name IN ('Headquarters', 'Quincy Branch')
+WHERE name IN ('Headquarters', 'Quincy Branch');
