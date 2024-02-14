@@ -47,3 +47,75 @@ WHERE open_emp_id <> (
 SELECT branch_id, name, city
 FROM branch
 WHERE name IN ('Headquarters', 'Quincy Branch');
+
+SELECT emp_id, fname, lname, title
+FROM employee
+WHERE employee.emp_id IN (
+    SELECT superior_emp_id
+    FROM employee
+);
+
+# IN can be used in pair with NOT
+
+SELECT emp_id, fname, lname, title
+FROM employee
+WHERE employee.emp_id NOT IN (
+    SELECT superior_emp_id
+    FROM employee
+    WHERE superior_emp_id IS NOT NULL
+);
+
+# ALL allows us to compare single value with
+# each of the resulting set
+
+SELECT emp_id, fname, lname, title
+FROM employee
+WHERE emp_id <> ALL (
+    SELECT superior_emp_id
+    FROM employee
+    WHERE superior_emp_id IS NOT NULL
+);
+
+# Comparison of a value with a NULL results in empty set
+
+SELECT emp_id, fname, lname, title
+FROM employee
+WHERE emp_id NOT IN (1, 2, NULL);
+
+# ANY is close to ALL, but returns a true
+# if there is at least one match
+# = ANY is equivalent to IN
+
+SELECT account_id, cust_id, product_cd, avail_balance
+FROM account
+WHERE avail_balance > ANY (
+    SELECT a.avail_balance
+    FROM account a
+    INNER JOIN individual i
+        ON a.cust_id = i.cust_id
+    WHERE i.fname = 'Frank' AND i.lname = 'Tucker'
+);
+
+# Subquieries resulting in multiple columns
+
+SELECT account_id, product_cd, cust_id
+FROM account
+WHERE (open_branch_id, open_emp_id) IN (
+    SELECT b.branch_id, e.emp_id
+    FROM branch b
+    INNER JOIN employee e
+        ON b.branch_id = e.assigned_branch_id
+    WHERE b.name = 'Woburn Branch'
+        AND (e.title = 'Teller' OR e.title = 'Head Teller')
+);
+
+# Correlated subquieries
+# Mentioning of c.cust_id makes it correlated
+
+SELECT c.cust_id, c.cust_type_cd, c.city
+FROM customer c
+WHERE 2 = (
+    SELECT COUNT(*)
+    FROM account a
+    WHERE a.cust_id = c.cust_id
+);
