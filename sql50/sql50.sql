@@ -371,3 +371,12 @@ SELECT sell_date,
 FROM Activities
 GROUP BY sell_date
 ORDER BY sell_date;
+
+# 1327. List the Products Ordered in a Period
+SELECT p.product_name, SUM(o.unit) unit
+FROM Products p
+INNER JOIN Orders o
+    ON p.product_id = o.product_id
+WHERE MONTH(o.order_date) = 2 AND YEAR(o.order_date) = 2020
+GROUP BY p.product_id
+HAVING unit >= 100;
