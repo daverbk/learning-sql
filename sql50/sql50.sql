@@ -380,3 +380,8 @@ INNER JOIN Orders o
 WHERE MONTH(o.order_date) = 2 AND YEAR(o.order_date) = 2020
 GROUP BY p.product_id
 HAVING unit >= 100;
+
+# 1517. Find Users With Valid E-Mails
+SELECT user_id, name, mail
+FROM Users
+WHERE mail REGEXP '^[A-Za-z][A-Za-z0-9_\.\-]*@leetcode[.]com$';
