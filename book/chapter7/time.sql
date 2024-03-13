@@ -16,42 +16,42 @@ FROM mysql.time_zone_name;
 # Timestamp - YYYY-MM-DD HH:MI:SS
 # Time - HHH:MI:SS
 UPDATE transaction
-SET txn_date =  '2005-03-27 15:30:00'
+SET txn_date = '2005-03-27 15:30:00'
 WHERE txn_id = 99999;
 
 # String to date casting
-SELECT cast('2005-03-27 15:30:00' AS DATETIME);
+SELECT CAST('2005-03-27 15:30:00' AS DATETIME);
 
-SELECT cast('2005-03-27' AS DATE) date_field,
-       cast('108:17:57' AS TIME) time_field;
+SELECT CAST('2005-03-27' AS DATE) date_field,
+       CAST('108:17:57' AS TIME)  time_field;
 
 # We can use str_to_date() with a special formatting
 UPDATE individual
-SET birth_date = str_to_date('March 27, 2005', '%M %d, %Y')
+SET birth_date = STR_TO_DATE('March 27, 2005', '%M %d, %Y')
 WHERE cust_id = 9999;
 
 # Current date time functions
-SELECT current_date(), current_time(), current_timestamp();
+SELECT CURRENT_DATE(), CURRENT_TIME(), CURRENT_TIMESTAMP();
 
 # We can use date_add to add interval to a date
-SELECT date_add(current_date(), INTERVAL 5 DAY);
+SELECT DATE_ADD(CURRENT_DATE(), INTERVAL 5 DAY);
 
 UPDATE transaction
-SET txn_date = date_add(txn_date, INTERVAL '3:27:11' HOUR_SECOND)
+SET txn_date = DATE_ADD(txn_date, INTERVAL '3:27:11' HOUR_SECOND)
 WHERE txn_id = 9999;
 
 # last_day() can select the last day of a given month
-SELECT last_day('2005-03-25');
+SELECT LAST_DAY('2005-03-25');
 
 # convert_tz handles converting between timezones
-SELECT current_timestamp() current_est,
-    convert_tz(current_timestamp(), 'US/Eastern', 'UTC') current_utc;
+SELECT CURRENT_TIMESTAMP()                                  current_est,
+       CONVERT_TZ(CURRENT_TIMESTAMP(), 'US/Eastern', 'UTC') current_utc;
 
 # dayname() returns day of the week
-SELECT dayname('2005-03-22');
+SELECT DAYNAME('2005-03-22');
 
 # extract() can be used with an interval name
-SELECT extract(YEAR FROM '2005-03-22 22:19:05');
+SELECT EXTRACT(YEAR FROM '2005-03-22 22:19:05');
 
 # datediff() return the count of full dates between two dates
-SELECT datediff('2005-09-05', '2005-06-22');
+SELECT DATEDIFF('2005-09-05', '2005-06-22');

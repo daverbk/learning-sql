@@ -1,7 +1,7 @@
 # Try to create record with existing pk value
 # Would result in [23000][1062] Duplicate entry '1' for key
 INSERT INTO person
-(person_id, first_name, last_name, gender, birth_date)
+    (person_id, first_name, last_name, gender, birth_date)
 VALUES (1, 'Charles', 'Fulton', 'M', '1968-01-15');
 
 # Try to create record with non-existing fk value

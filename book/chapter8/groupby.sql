@@ -1,3 +1,5 @@
+USE bank;
+
 # Open accounts by employee
 SELECT open_emp_id, COUNT(*) how_many
 FROM account
@@ -33,7 +35,7 @@ SELECT product_cd,
        MIN(avail_balance) min_balance,
        AVG(avail_balance) avg_balance,
        SUM(avail_balance) tot_balance,
-       COUNT(*) num_accounts
+       COUNT(*)           num_accounts
 FROM account;
 
 # Server knows that it has to first set up 6
@@ -43,7 +45,7 @@ SELECT product_cd,
        MIN(avail_balance) min_balance,
        AVG(avail_balance) avg_balance,
        SUM(avail_balance) tot_balance,
-       COUNT(*) num_accounts
+       COUNT(*)           num_accounts
 FROM account
 GROUP BY product_cd;
 
@@ -57,22 +59,25 @@ FROM account;
 
 # grouping by multiple columns
 # we receive 14 groups
-SELECT product_cd, open_branch_id,
+SELECT product_cd,
+       open_branch_id,
        SUM(avail_balance) tot_balance
 FROM account
 GROUP BY product_cd, open_branch_id;
 
 # grouping by expression
 SELECT EXTRACT(YEAR FROM start_date) year,
-       COUNT(*) how_many
+       COUNT(*)                      how_many
 FROM employee
 GROUP BY EXTRACT(YEAR FROM start_date);
 
 # rollups
-SELECT product_cd, open_branch_id,
+SELECT product_cd,
+       open_branch_id,
        SUM(avail_balance) tot_balance
 FROM account
-GROUP BY product_cd, open_branch_id WITH ROLLUP;
+GROUP BY product_cd, open_branch_id
+WITH ROLLUP;
 
 # having is used to filter grouping
 # where is executed before grouping

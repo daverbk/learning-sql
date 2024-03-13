@@ -1,3 +1,5 @@
+USE bank;
+
 # 8.1
 SELECT COUNT(*)
 FROM account;

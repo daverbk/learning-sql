@@ -1,3 +1,5 @@
+USE bank;
+
 # 6.1
 # 1) { L M N O P Q R S T }
 # 2) { L M N O P P Q R S T }

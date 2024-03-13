@@ -1,7 +1,9 @@
+USE bank;
+
 # This query returns an empty set
 # as two sets are not intersecting in any way
 (SELECT emp_id, fname, lname
-FROM employee)
+ FROM employee)
 INTERSECT
 SELECT cust_id, fname, lname
 FROM individual;
@@ -10,7 +12,7 @@ FROM individual;
 SELECT emp_id
 FROM employee
 WHERE assigned_branch_id = 2
-    AND (title = 'Teller' OR title = 'Head Teller')
+  AND (title = 'Teller' OR title = 'Head Teller')
 INTERSECT
 SELECT DISTINCT open_emp_id
 FROM account

@@ -1,3 +1,5 @@
+USE bank;
+
 # LIMIT can be used to restrict the number of rows returned by the query
 SELECT open_emp_id, COUNT(*) how_many
 FROM account
@@ -68,20 +70,20 @@ FROM account;
 
 DELETE individual2, customer2, account2
 FROM individual2
-INNER JOIN customer2
-    ON customer2.cust_id = individual2.cust_id
-INNER JOIN account2
-    ON account2.cust_id = individual2.cust_id
+         INNER JOIN customer2
+                    ON customer2.cust_id = individual2.cust_id
+         INNER JOIN account2
+                    ON account2.cust_id = individual2.cust_id
 WHERE individual2.cust_id = 1;
 
 UPDATE individual2
-INNER JOIN customer2
+    INNER JOIN customer2
     ON customer2.cust_id = individual2.cust_id
-INNER JOIN account2
+    INNER JOIN account2
     ON account2.cust_id = individual2.cust_id
 SET individual2.cust_id = individual2.cust_id + 10000,
-    customer2.cust_id = customer2.cust_id + 10000,
-    account2.cust_id = account2.cust_id + 10000
+    customer2.cust_id   = customer2.cust_id + 10000,
+    account2.cust_id    = account2.cust_id + 10000
 WHERE individual2.cust_id = 3;
 
 

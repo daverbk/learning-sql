@@ -1,5 +1,6 @@
 # Delete record
-DELETE FROM person
+DELETE
+FROM person
 WHERE person_id = 2;
 
 # Check deletion result

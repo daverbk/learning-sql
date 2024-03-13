@@ -10,8 +10,11 @@ WHERE person_id = 1;
 
 # Update William's address data
 UPDATE person
-SET address = '1225 Tremont St.', city = 'Boston',
-state = 'MA', country = 'USA', postal_code = '02138'
+SET address     = '1225 Tremont St.',
+    city        = 'Boston',
+    state       = 'MA',
+    country     = 'USA',
+    postal_code = '02138'
 WHERE person_id = 1;
 
 # Check changes

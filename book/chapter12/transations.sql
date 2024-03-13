@@ -1,3 +1,5 @@
+USE bank;
+
 # START TRANSACTION, COMMIT, ROLLBACK are executed implicitly
 # All db servers have a 'start transaction' command
 START TRANSACTION;
@@ -31,7 +33,8 @@ WHERE product_cd = 'XYZ';
 SAVEPOINT before_close_accounts;
 
 UPDATE account
-SET status = 'CLOSED', close_date = CURRENT_TIMESTAMP(),
+SET status             = 'CLOSED',
+    close_date         = CURRENT_TIMESTAMP(),
     last_activity_date = CURRENT_TIMESTAMP()
 WHERE product_cd = 'XYZ';
 
@@ -44,4 +47,5 @@ COMMIT;
 SHOW TABLE STATUS LIKE 'transaction';
 
 # To change the storage engine
-ALTER TABLE transaction ENGINE = InnoDB;
+ALTER TABLE transaction
+    ENGINE = InnoDB;

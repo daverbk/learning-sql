@@ -1,3 +1,5 @@
+USE bank;
+
 # A compound query with UNION set operator
 SELECT 1 num, 'abc' str
 UNION
@@ -24,7 +26,7 @@ FROM business;
 SELECT emp_id
 FROM employee
 WHERE assigned_branch_id = 2
-    AND (title = 'Teller' OR title = 'Head Teller')
+  AND (title = 'Teller' OR title = 'Head Teller')
 UNION ALL
 SELECT DISTINCT open_emp_id
 FROM account
@@ -34,7 +36,7 @@ WHERE open_branch_id = 2;
 SELECT emp_id
 FROM employee
 WHERE assigned_branch_id = 2
-    AND (title = 'Teller' OR title = 'Head Teller')
+  AND (title = 'Teller' OR title = 'Head Teller')
 UNION
 SELECT DISTINCT open_emp_id
 FROM account
