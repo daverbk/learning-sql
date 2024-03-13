@@ -13,7 +13,8 @@ USE bank;
 # Use "SOURCE :filepath" to import data
 
 # Check current date/time
-SELECT now() FROM dual;
+SELECT NOW()
+FROM dual;
 
 # Check available character sets
 SHOW CHARACTER SET;

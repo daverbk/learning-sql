@@ -1,3 +1,5 @@
+USE bank;
+
 # There are 4 types of constraints:
 # Primary Key, Foreign Key, Unique, and Check
 
@@ -31,27 +33,27 @@ CREATE TABLE product
 
 # We can alter a table to add constraints
 ALTER TABLE product
-ADD CONSTRAINT pk_product PRIMARY KEY (product_cd);
+    ADD CONSTRAINT pk_product PRIMARY KEY (product_cd);
 
 ALTER TABLE product
-ADD CONSTRAINT fk_product_type_cd FOREIGN KEY (product_type_cd)
-    REFERENCES product_type (product_type_cd);
+    ADD CONSTRAINT fk_product_type_cd FOREIGN KEY (product_type_cd)
+        REFERENCES product_type (product_type_cd);
 
 # We can also drop constraints
 ALTER TABLE product
-DROP PRIMARY KEY;
+    DROP PRIMARY KEY;
 
 ALTER TABLE product
-DROP FOREIGN KEY fk_product_type_cd;
+    DROP FOREIGN KEY fk_product_type_cd;
 
 # Cascading constraints
 ALTER TABLE product
-DROP CONSTRAINT fk_product_type_cd;
+    DROP CONSTRAINT fk_product_type_cd;
 
 ALTER TABLE product
-ADD CONSTRAINT fk_product_type_cd FOREIGN KEY (product_type_cd)
-    REFERENCES product_type (product_type_cd)
-    ON UPDATE CASCADE;
+    ADD CONSTRAINT fk_product_type_cd FOREIGN KEY (product_type_cd)
+        REFERENCES product_type (product_type_cd)
+        ON UPDATE CASCADE;
 
 # If we now update the product_type_cd in the product_type table
 # the product_type_cd in the product table will also be updated
@@ -68,12 +70,12 @@ ORDER BY product_type_cd;
 
 # We can also set the ON DELETE CASCADE
 ALTER TABLE product
-DROP CONSTRAINT fk_product_type_cd;
+    DROP CONSTRAINT fk_product_type_cd;
 
 ALTER TABLE product
-ADD CONSTRAINT fk_product_type_cd FOREIGN KEY (product_type_cd)
-    REFERENCES product_type (product_type_cd)
-    ON DELETE CASCADE;
+    ADD CONSTRAINT fk_product_type_cd FOREIGN KEY (product_type_cd)
+        REFERENCES product_type (product_type_cd)
+        ON DELETE CASCADE;
 
 # If we now delete a product_type_cd in the product_type table
 # the product_type_cd in the product table will also be deleted
